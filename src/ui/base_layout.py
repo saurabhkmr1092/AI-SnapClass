@@ -54,19 +54,15 @@ def style_base_layout():
 
                 h1 {
                     font-family: 'Climate Crisis', sans-serif !important;
-
                     font-size: 3.5rem !important;
-                    color:black !important;
                     line-height: 1.0 !important;
                     margin-bottom:0rem !important; 
                 }
 
-
                 h2 {
                     font-family: 'Climate Crisis', sans-serif !important;
-                    color:black !important;
                     font-size: 2rem !important;
-                    line-height: 0.9 !important;
+                    line-height: 1.0 !important;
                     margin-bottom:0rem !important; 
                 }
 
