@@ -168,7 +168,7 @@ def teacher_tab_take_attendance():
 
                         attendance_to_log.append({
                             'student_id': student['student_id'],
-                            'subject_id': student['subject_id'],
+                            'subject_id': selected_subject_id,
                             'timestamp': current_timestamp,
                             'is_present': bool(is_present)
                         })
@@ -245,10 +245,10 @@ def teacher_tab_attendance_records():
     )
 
     summary['Attendance Stats'] = (
-        "✅" + summary['present_Count'].astype(str) + "/" + summary['Total_Count'].astype(str) + 'Students'
+        "✅" + summary['Present_Count'].astype(str) + "/" + summary['Total_Count'].astype(str) + 'Students'
     )
 
-    display_df = (summary.sort_values(by = 'ts_group', ascending=False)['Time','Subject','Subject Code', 'Attendance Stats'])
+    display_df = (summary.sort_values(by = 'ts_group', ascending=False)[['Time','Subject','Subject Code', 'Attendance Stats']])
     st.dataframe(display_df, width='stretch', hide_index = True)
 
 

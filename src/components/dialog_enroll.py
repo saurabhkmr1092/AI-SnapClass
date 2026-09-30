@@ -17,7 +17,7 @@ def enroll_dialog():
                 student_id = st.session_state.student_data['student_id']
                 check = supabase.table('subject_students').select('*').eq('subject_id', subject['subject_id']).eq('student_id',student_id).execute()
 
-                if check:
+                if check.data:
                     st.warning('You are already Enrolled')
                 else:
                     enroll_student_to_subject(subject['subject_id'], student_id)

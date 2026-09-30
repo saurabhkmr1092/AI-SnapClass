@@ -63,10 +63,10 @@ def student_dashboard():
 
         stats = stats_map.get(sid, {"total":0, "attended":0})
         def unenroll_button():
-                if st.button('Unenroll from this subject', type='tertiary',width='stretch',icon=':material/delete_forever'):
-                    unenroll_student_to_subject(student_id, sid)
+                if st.button('Unenroll from this subject', type='tertiary',width='stretch',icon=':material/delete_forever:',key=f"unenroll_{sid}"):
+                    unenroll_student_to_subject(sid, student_id)
                     st.toast(f'Unenrolled from {sub['name']} successfully!')
-        
+                    st.rerun()
 
         with cols[i % 2]:
             subject_card(
@@ -117,7 +117,7 @@ def student_screen():
                 if detected:
                     student_id = list(detected.keys())[0]
                     all_students = get_all_students()
-                    student = next((s for s in all_students if s[student_id]==student_id), None)
+                    student = next((s for s in all_students if s['student_id']==student_id), None)
 
                     if student:
                         st.session_state.is_logged_in = True
@@ -149,7 +149,7 @@ def student_screen():
                 if new_name:
                     with st.spinner('Creating profile...'):
                         img = np.array(Image.open(picture))
-                        encodings = get_face_embeddings(picture)
+                        encodings = get_face_embeddings(img)
                         if encodings:
                             face_emb = encodings[0].tolist()
                             voice_emb = None
@@ -163,7 +163,7 @@ def student_screen():
                                 train_classifier()
 
                                 st.session_state.is_logged_in = True
-                                st.select_slider.user_role = 'student'
+                                st.session_state.user_role = 'student'
                                 st.session_state.student_data = response_data[0]
                                 st.toast(f"Profile Created! Hi {new_name}!")
                                 time.sleep(1)
