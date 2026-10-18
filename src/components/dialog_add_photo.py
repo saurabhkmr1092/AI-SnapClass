@@ -47,4 +47,4 @@ def add_photos_dialog():
     if st.button('Done', type='primary', width='stretch'):
         st.rerun()
 
-        
+    

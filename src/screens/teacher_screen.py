@@ -14,7 +14,7 @@ from src.database.config import supabase
 from src.components.dialog_attendance_result import attendance_result_dialog
 from src.components.dialog_voice_attendance import voice_attendance_dialog
 from datetime import datetime
-
+from zoneinfo import ZoneInfo
 
 
 def teacher_screen():
@@ -152,7 +152,7 @@ def teacher_tab_take_attendance():
                     st.warning("No student enrolled in this course!")
                 else:
 
-                    current_timestamp = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
+                    current_timestamp = datetime.now(ZoneInfo("Asia/Kolkata")).strftime("%Y-%m-%dT%H:%M:%S")
 
                     for node in enrolled_students:
                         student = node['students']
